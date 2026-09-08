@@ -1,0 +1,9 @@
+# Direct dependencies from the verified Python 3.14.3 environment.
+akshare==1.18.94
+pandas==3.0.5
+numpy==2.5.2
+matplotlib==3.11.1
+scipy==1.18.1
+pyarrow==25.0.1
+ipython==9.11.0
+ipykernel==7.2.0
