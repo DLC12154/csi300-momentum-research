@@ -17,3 +17,7 @@
 Git提交范围检查排除Parquet、archive和虚拟环境。notebook输出中的本机项目路径统一显示为<PROJECT_ROOT>。原始输出不做清理，仍留在原件及本地归档中。
 
 局限详见README和file_inventory.md；本次保留原统计研究口径，未将其改写为新交易策略。
+
+## 2026-10-29 补充验证
+
+新增历史股票池、回溯性时间外验证与可执行长仓检验，代码、数据覆盖和结果复核见 `docs/advanced_validation.md`。该区间在原项目和 Git 历史中已经存在，不称为事先冻结的锁定 OOS。新增流程与上述初始 notebook 验证相互独立；正式研究结论以 `data/processed/advanced/` 为准。

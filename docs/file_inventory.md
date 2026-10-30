@@ -22,3 +22,20 @@
 ## 方法审计
 
 原RankIC均值/标准差是未年化ICIR，标签重叠，因此不能直接当独立样本显著性。多空收益Q5-Q1按单位多头与单位空头名义头寸，是简化差值净值。原最大回撤从第一个观测净值起算，未加入初始1；保留该口径。各回看窗口因起始日不同，调仓相位也不同，并非严格同区间控制实验。年份按信号日期归属，跨年持有期收益不拆分。没有行业/市值中性化、停牌涨跌停约束、真实成交延迟及借券可行性。未来价格可得性参与样本筛选。请勿将此结果描述为可交易alpha证明。
+
+## 历史股票池与可执行研究补充
+
+| 文件 | 用途 |
+|---|---|
+| `src/build_historical_dataset.py` | 按调仓日下载 300 只历史成分；缓存历史成员行情；校验快照数量、原子写入和可恢复下载 |
+| `src/advanced_research.py` | 统一五日调仓相位、开发/回溯性时间外验证、RankIC、长仓组合、交易约束、成本和数据质量检查 |
+| `notebooks/04_point_in_time_holdout_and_execution.ipynb` | 展示历史池、回溯性时间外验证和可执行回测结果，不负责重新训练 |
+| `data/raw/csi300_historical_membership.csv` | 291 个历史日期、87,300 条成员快照 |
+| `data/raw/csi300_prices_historical.parquet` | 481 个历史成员、731,507 条后复权行情；本地文件，不提交 Git |
+| `data/raw/historical_dataset_manifest.json` | 数据源、生成时间、覆盖范围、有效日期与 SHA-256 |
+| `data/processed/advanced/` | 分阶段 IC、分组收益、净值、绩效、交易、调仓、质量报告及运行参数 |
+| `figures/04_*.png` | 分阶段 RankIC、时间外验证净值、换手与成本 |
+| `tests/test_advanced_research.py` | 标签对齐、未来收益入样、成本、涨跌停、NAV 与缓存结构测试 |
+| `docs/advanced_validation.md` | 数据、执行、结果和异常跳变复核 |
+
+历史池成员取自 Baostock `query_hs300_stocks(date=...)`，不再使用当前成分回溯。主策略只做多 Q5；Q5−Q1 仅是研究诊断。2024–2025 是回溯性时间外验证区间，开发期为 2020–2023。交易模型和仍未覆盖的整手、红利税、盘口深度、永久冲击等问题见 README 与高级验证记录。
